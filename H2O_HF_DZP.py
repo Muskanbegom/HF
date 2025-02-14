@@ -2,7 +2,6 @@ import numpy as np
 from ase.data import atomic_numbers, atomic_masses, covalent_radii, chemical_symbols
 
 NOE = atomic_numbers
-n_occ = (NOE["H"] + NOE["H"] + NOE["O"])/2 # Number of occupied orbitals
 convergence_threshold = 1e-6
 max_iterations = 100
 
@@ -11,10 +10,11 @@ max_iterations = 100
 t_data = np.loadtxt("t.dat", usecols=[0])
 
 
-# Get the maximum integer value from the first column
-nao = int(np.max(t_data))  # ✅ Correct way to determine `nao`
+# Get the maximum integer value from the first column which will determine nao
+nao = int(np.max(t_data))  
+n_occ = (NOE["H"] + NOE["H"] + NOE["O"])/2 # Number of occupied orbitals
 
-print(f"Detected nao = {nao}")  # Should now correctly print 26
+print(f"Detected nao = {nao}") #if one wants to see
 
 # Initialize matrices
 t_matrix = np.zeros((nao, nao))
